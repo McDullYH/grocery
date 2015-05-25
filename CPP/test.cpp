@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <errno.h>
-#include <string.h>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -156,6 +156,7 @@ void CPUTest();
 void signed_and_unsigned();
 void argTest(int64_t);
 int test_getpwnam();
+void test_fstream();
 
 
 
@@ -167,7 +168,8 @@ int main(int argc,char* argv[])
 {
 
 
-  test_getpwnam();
+  test_fstream();
+  //test_getpwnam();
 
   //printf("%02d\n", 3);
 
@@ -877,3 +879,37 @@ void test_mem()
   memcpy((char*)p,"efgh",4);
 }
 
+void test_fstream()
+{
+  int i=1;
+  char c='c';
+  double d =2.1;
+  char cs[]="cstring";
+  string str = "string";
+
+  ofstream ofs;
+  ofs.open("ofile");
+  ofs<<i<<c<<d<<cs<<str<<endl;
+  ofs.close();
+
+  ifstream ifs;
+  ifs.open("ifile");
+  ifs>>i>>c>>d>>str;
+  ifs.close();
+  cout<<i<<c<<d<<str<<endl;
+
+  ifstream iifs("iifile");
+  iifs>>i>>c>>d>>str;
+  cout<<i<<c<<d<<str<<endl;
+  ifs.close();
+  //need close too
+
+
+  fstream fs;
+  fs.open("file");
+  fs<<i<<c<<d<<cs<<str<<endl;
+  fs.close();
+
+
+
+}
